@@ -11,6 +11,7 @@ namespace WebApi.Modules
                 .AddApiVersioning(p =>
                 {
                     p.DefaultApiVersion = new ApiVersion(1, 0);
+                    p.ReportApiVersions = true;
                     p.AssumeDefaultVersionWhenUnspecified = true;
                 });
 
