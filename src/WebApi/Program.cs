@@ -13,14 +13,6 @@ namespace WebApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((_, config) =>
-                {
-                    var settings = config.Build();
-                    Log.Logger = new LoggerConfiguration()
-                        .ReadFrom.Configuration(settings)
-                        .CreateLogger();
-                })
-                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

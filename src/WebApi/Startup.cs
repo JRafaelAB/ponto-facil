@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using WebApi.Modules;
 using WebApi.Modules.Swagger;
 
@@ -24,9 +25,13 @@ namespace WebApi
                 .AddSwagger()
                 .AddVersioning()
                 .AddControllers();
+            
+            services.AddSingleton<ILogger>(new LoggerConfiguration()
+                .ReadFrom.Configuration(Configuration)
+                .CreateLogger());
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider, ILogger logger)
         {
             if (env.IsDevelopment())
             {
@@ -34,6 +39,8 @@ namespace WebApi
             }
 
             app.ConfigureSwagger(provider);
+
+            app.ConfigureExceptionHandler(logger);
             
             app.UseHttpsRedirection();
 
