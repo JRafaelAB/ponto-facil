@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Serilog;
+using WebApi.Modules.Middlewares;
 
 namespace WebApi.Modules
 {
@@ -9,7 +10,7 @@ namespace WebApi.Modules
         {
             app.UseExceptionHandler(appError =>
             {
-
+                appError.Run(async context => await ExceptionHandlerMiddleware.ExceptionHandler(context, logger));
             });
         }
     }
