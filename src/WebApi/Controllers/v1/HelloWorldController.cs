@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.v1
-{    
+{
+    /// <summary>
+    /// HelloWorldController
+    /// </summary>
     [ApiVersion("1.0")]
     [ApiController]
     [Route("v{version:apiVersion}/[controller]")]
@@ -17,6 +20,8 @@ namespace WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         public IActionResult GetHelloWorld()
         {
+            int? tryme = null;
+            int novo = (int)tryme;
             return Ok("Hello World, I'm Alive!");
         }
     }

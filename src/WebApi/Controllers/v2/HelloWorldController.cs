@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.v2
 {    
+    /// <summary>
+    /// HelloWorldController
+    /// </summary>
     [ApiVersion("2.0")]
     [ApiController]
     [Route("v{version:apiVersion}/[controller]")]
