@@ -65,6 +65,8 @@ artifacts/
 **/Properties/launchSettings.json
 **/launchSettings.json
 **/appsettings.Development.json
+**\appsettings.Development.json
+
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
