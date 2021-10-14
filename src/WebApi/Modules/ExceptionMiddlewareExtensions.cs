@@ -4,7 +4,7 @@ using WebApi.Modules.Middlewares;
 
 namespace WebApi.Modules
 {
-    public static class ExceptionMiddlewareExtensions
+    internal static class ExceptionMiddlewareExtensions
     {
         public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILogger logger)
         {

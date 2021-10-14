@@ -24,11 +24,8 @@ namespace WebApi
             services
                 .AddSwagger()
                 .AddVersioning()
+                .AddLogger(Configuration)
                 .AddControllers();
-            
-            services.AddSingleton<ILogger>(new LoggerConfiguration()
-                .ReadFrom.Configuration(Configuration)
-                .CreateLogger());
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider, ILogger logger)

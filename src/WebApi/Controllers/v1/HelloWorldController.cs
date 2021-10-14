@@ -20,8 +20,6 @@ namespace WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         public IActionResult GetHelloWorld()
         {
-            int? tryme = null;
-            int novo = (int)tryme;
             return Ok("Hello World, I'm Alive!");
         }
     }

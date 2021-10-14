@@ -8,7 +8,7 @@ using Domain.Resources;
 
 namespace WebApi.Modules.Middlewares
 {
-    public static class ExceptionHandlerMiddleware
+    internal static class ExceptionHandlerMiddleware
     {
         public static async Task ExceptionHandler(HttpContext context, ILogger logger)
         {

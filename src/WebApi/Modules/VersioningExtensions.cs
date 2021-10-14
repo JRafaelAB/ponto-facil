@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApi.Modules
 {
-    public static class VersioningExtensions
+    internal static class VersioningExtensions
     {
         public static IServiceCollection AddVersioning(this IServiceCollection services)
         {

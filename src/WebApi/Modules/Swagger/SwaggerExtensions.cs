@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace WebApi.Modules.Swagger
 {
-    public static class SwaggerExtensions
+    internal static class SwaggerExtensions
     {
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
