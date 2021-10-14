@@ -1,0 +1,11 @@
+﻿namespace Domain.Entities
+{
+    public class User
+    {
+        public long Id { get; init; }
+        public string Name { get; init; }
+        public string Login { get; init; }
+        public string Password { get; init; }
+        public string Salt { get; init; }
+    }
+}
