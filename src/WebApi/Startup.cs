@@ -1,6 +1,8 @@
+using Infrastructure.DataAccess.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +28,16 @@ namespace WebApi
                 .AddVersioning()
                 .AddLogger(Configuration)
                 .AddControllers();
+
+            string connectionString = Configuration.GetValue<string>("SQL_CONNECTION_STRING") ?? string.Empty;
+            
+            services.AddDbContext<ClockContext>(
+                options =>
+                {
+                    options.UseSqlServer(connectionString, option => option.MigrationsAssembly("Infrastructure"));
+                    options.EnableSensitiveDataLogging();
+                });
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider, ILogger logger)

@@ -1,5 +1,5 @@
-﻿using System;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Domain.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess.Contexts
@@ -22,10 +22,7 @@ namespace Infrastructure.DataAccess.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if (modelBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(modelBuilder));
-            }
+            modelBuilder.ValidateNullArgument();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClockContext).Assembly);
         }
