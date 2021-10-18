@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -11,5 +10,11 @@ namespace Domain.Entities
         public string Password { get; init; }
         public string Salt { get; init; }
         public IEnumerable<Clock>? Clocks { get; init; }
+        public User(string name, string login, string password)
+        {
+            Name = name;
+            Login = login;
+            Password = password;
+        }
     }
 }
