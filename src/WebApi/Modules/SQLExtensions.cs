@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApi.Modules
 {
-    public static class SQLExtensions
+    internal static class SQLExtensions
     {
         public static IServiceCollection AddSQLServer(this IServiceCollection services, IConfiguration configuration)
         {

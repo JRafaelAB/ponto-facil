@@ -14,17 +14,14 @@ namespace WebApi.Modules.Middlewares
         {
             var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
 
-            if (contextFeature != null)
+            switch (contextFeature.Error)
             {
-                switch (contextFeature.Error)
-                {
-                    default:
-                        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                        context.Response.ContentType = MediaTypeNames.Application.Json;
-                        logger.Error($"Unexpected Error: {contextFeature.Error}");
-                        await context.Response.WriteAsync(JsonConvert.SerializeObject(Messages.GenericError + $" | traceId: {context.TraceIdentifier}"));
-                        break;
-                }
+                default:
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    context.Response.ContentType = MediaTypeNames.Application.Json;
+                    logger.Error($"Unexpected Error: {contextFeature.Error}");
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(Messages.GenericError + $" | traceId: {context.TraceIdentifier}"));
+                    break;
             }
         }
     }
