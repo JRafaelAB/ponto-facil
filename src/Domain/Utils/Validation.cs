@@ -2,7 +2,7 @@
 
 namespace Domain.Utils
 {
-    public static class ValidationUtils
+    public static class Validation
     {
         public static void ValidateNullArgument(this object? obj)
         {
