@@ -11,5 +11,13 @@ namespace Domain.Utils
                 throw new ArgumentException(null, nameof(obj));
             }
         }
+
+        public static void ValidateStringArgumentNotEmpty(this string argument)
+        {
+            if (string.IsNullOrWhiteSpace(argument))
+            {
+                throw new ArgumentException(null, nameof(argument));
+            }
+        }
     }
 }

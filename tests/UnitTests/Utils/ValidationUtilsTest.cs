@@ -17,10 +17,27 @@ namespace UnitTests.Utils
         }
         
         [Fact]
-        public void TestingNullArgumentException_ValidateNullArgument()
+        public void TestingArgumentException_ValidateNullArgument()
         {
             object? obj = null;
             Assert.Throws<ArgumentException>(obj.ValidateNullArgument);
+        }
+        
+        
+        [Theory]
+        [InlineData("Hello World")]
+        [InlineData("ahuhuhashashsauksaushushaksahksa")]
+        [InlineData("c")]
+        public void TestingSucess_ValidateStringArgumentNotEmpty(string argument)
+        {
+            argument.ValidateStringArgumentNotEmpty();
+        }
+        
+        [Fact]
+        public void TestingArgumentException_ValidateStringArgumentNotEmpty()
+        {
+            string argument = string.Empty;
+            Assert.Throws<ArgumentException>(argument.ValidateStringArgumentNotEmpty);
         }
         
     }

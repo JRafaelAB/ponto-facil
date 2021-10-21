@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Domain.Utils
 {
-    public static class Salt
+    public static class Cryptography
     {
+        private const string PEPPER_ENVIRONMENT_KEY = "PEPPER";
+        private const string SEPARATOR_TOKEN = "-";
         private static readonly Random _random = new ();
         
-        public static string Generate(uint size)
+        public static string GenerateSalt(uint size)
         {
             StringBuilder str_build = new ();
             
@@ -40,6 +43,19 @@ namespace Domain.Utils
             }
 
             return str_build.ToString();
+        }
+
+        public static string EncryptPassword(string password, string salt)
+        {
+            password.ValidateStringArgumentNotEmpty();
+            string pepper = Environment.GetEnvironmentVariable(PEPPER_ENVIRONMENT_KEY) ?? string.Empty;
+
+            using SHA512 sha512hash = SHA512.Create();
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(password + salt + pepper);
+            byte[] hashBytes = sha512hash.ComputeHash(passwordBytes);
+            string hash = BitConverter.ToString(hashBytes).Replace(SEPARATOR_TOKEN, string.Empty);;
+
+            return hash;
         }
     }
 }
