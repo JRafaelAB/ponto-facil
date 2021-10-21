@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Models.Requests
+﻿namespace Domain.Models.Requests
 {
     public class PostUserRequest
     {
