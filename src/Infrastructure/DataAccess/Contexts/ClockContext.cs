@@ -39,7 +39,7 @@ namespace Infrastructure.DataAccess.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ValidateNullArgument();
+            modelBuilder.ValidateNullArgument(nameof(modelBuilder));
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClockContext).Assembly);
         }

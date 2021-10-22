@@ -9,7 +9,7 @@ namespace Infrastructure.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ValidateNullArgument();
+            builder.ValidateNullArgument(nameof(builder));
 
             builder.ToTable(nameof(User));
             

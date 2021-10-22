@@ -120,4 +120,7 @@
   <data name="InternalServerError" xml:space="preserve">
     <value>System unavailable. Please try again later.</value>
   </data>
+  <data name="ArgumentStringNullOrEmpty" xml:space="preserve">
+    <value>Argument string cannot be null or empty.</value>
+  </data>
 </root>

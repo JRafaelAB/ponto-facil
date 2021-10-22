@@ -13,14 +13,14 @@ namespace UnitTests.Utils
         [InlineData('c')]
         public void TestingSucess_ValidateNullArgument(object? obj)
         {
-            obj.ValidateNullArgument();
+            obj.ValidateNullArgument(nameof(obj));
         }
         
         [Fact]
         public void TestingArgumentException_ValidateNullArgument()
         {
             object? obj = null;
-            Assert.Throws<ArgumentException>(obj.ValidateNullArgument);
+            Assert.Throws<ArgumentException>(() => obj.ValidateNullArgument(nameof(obj)));
         }
         
         
@@ -30,14 +30,14 @@ namespace UnitTests.Utils
         [InlineData("c")]
         public void TestingSucess_ValidateStringArgumentNotEmpty(string argument)
         {
-            argument.ValidateStringArgumentNotEmpty();
+            argument.ValidateStringArgumentNotNullOrEmpty(nameof(argument));
         }
         
         [Fact]
         public void TestingArgumentException_ValidateStringArgumentNotEmpty()
         {
             string argument = string.Empty;
-            Assert.Throws<ArgumentException>(argument.ValidateStringArgumentNotEmpty);
+            Assert.Throws<ArgumentException>(() => argument.ValidateStringArgumentNotNullOrEmpty(nameof(argument)));
         }
         
     }

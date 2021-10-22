@@ -61,6 +61,15 @@ namespace Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Argument string cannot be null or empty..
+        /// </summary>
+        public static string ArgumentStringNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ArgumentStringNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to System unavailable. Please try again later..
         /// </summary>
         public static string InternalServerError {

@@ -47,7 +47,7 @@ namespace Domain.Utils
 
         public static string EncryptPassword(string password, string salt)
         {
-            password.ValidateStringArgumentNotEmpty();
+            password.ValidateStringArgumentNotNullOrEmpty(nameof(password));
             string pepper = Environment.GetEnvironmentVariable(PEPPER_ENVIRONMENT_KEY) ?? string.Empty;
 
             using SHA512 sha512hash = SHA512.Create();
