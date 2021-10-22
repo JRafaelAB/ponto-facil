@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess.Contexts
 {
-    public sealed class ClockContext : DbContext
+    public class ClockContext : DbContext
     {
         
         private IDbConnection _connection;

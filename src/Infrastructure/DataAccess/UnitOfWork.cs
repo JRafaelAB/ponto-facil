@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Domain.UnitOfWork;
 using Infrastructure.DataAccess.Contexts;
 
-namespace Infrastructure.UnitOfWork
+namespace Infrastructure.DataAccess
 {
-    public sealed class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly ClockContext _clockContext;
         private bool _disposed;
