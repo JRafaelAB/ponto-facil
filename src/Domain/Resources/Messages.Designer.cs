@@ -63,9 +63,9 @@ namespace Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to System unavailable. Please try again later..
         /// </summary>
-        public static string GenericError {
+        public static string InternalServerError {
             get {
-                return ResourceManager.GetString("GenericError", resourceCulture);
+                return ResourceManager.GetString("InternalServerError", resourceCulture);
             }
         }
     }
