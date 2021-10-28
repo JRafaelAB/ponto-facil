@@ -11,16 +11,33 @@ namespace UnitTests.Utils
         [InlineData("10")]
         [InlineData(10.0)]
         [InlineData('c')]
-        public void TestarSucessoValidacao(object? obj)
+        public void TestingSucess_ValidateNullArgument(object? obj)
         {
-            obj.ValidateNullArgument();
+            obj.ValidateNullArgument(nameof(obj));
         }
         
         [Fact]
-        public void TestarExcecaoArgumentoInvalido()
+        public void TestingArgumentException_ValidateNullArgument()
         {
             object? obj = null;
-            Assert.Throws<ArgumentException>(obj.ValidateNullArgument);
+            Assert.Throws<ArgumentException>(() => obj.ValidateNullArgument(nameof(obj)));
+        }
+        
+        
+        [Theory]
+        [InlineData("Hello World")]
+        [InlineData("ahuhuhashashsauksaushushaksahksa")]
+        [InlineData("c")]
+        public void TestingSucess_ValidateStringArgumentNotEmpty(string argument)
+        {
+            argument.ValidateStringArgumentNotNullOrEmpty(nameof(argument));
+        }
+        
+        [Fact]
+        public void TestingArgumentException_ValidateStringArgumentNotEmpty()
+        {
+            string argument = string.Empty;
+            Assert.Throws<ArgumentException>(() => argument.ValidateStringArgumentNotNullOrEmpty(nameof(argument)));
         }
         
     }

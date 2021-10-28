@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Utils;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.v1.UseCases.PostUser
@@ -20,6 +21,8 @@ namespace WebApi.Controllers.v1.UseCases.PostUser
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         public IActionResult GetHelloWorld()
         {
+            string teste = null;
+            teste.ValidateStringArgumentNotNullOrEmpty(string.Empty);
             return Ok("Hello World, I'm Alive!");
         }
     }
