@@ -3,7 +3,6 @@ using Domain.DTOs;
 using Domain.Entities;
 using Domain.Repositories;
 using Infrastructure.DataAccess.Contexts;
-using Mapster;
 
 namespace Infrastructure.Repositories
 {
@@ -18,7 +17,7 @@ namespace Infrastructure.Repositories
 
         public async Task AddUser(UserDto userDto)
         {
-            User userEntity = userDto.Adapt<User>();
+            User userEntity = new(userDto);
             await this._context.Users.AddAsync(userEntity);
         }
     }
