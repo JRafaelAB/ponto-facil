@@ -17,7 +17,7 @@ namespace Domain.Utils
         {
             if (string.IsNullOrWhiteSpace(argument))
             {
-                throw new ArgumentException(Messages.ArgumentStringNullOrEmpty, nameof(argument));
+                throw new ArgumentException(Messages.ArgumentStringNullOrEmpty,paramName);
             }
         }
     }
