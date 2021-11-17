@@ -2,7 +2,6 @@
 using Domain.Models.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers.v1.UseCases.PostUser
