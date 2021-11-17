@@ -26,6 +26,7 @@ namespace WebApi
                 .AddVersioning()
                 .AddLogger(Configuration)
                 .AddSQLServer(Configuration)
+                .AddUseCases()
                 .AddControllers();
         }
 
@@ -39,7 +40,7 @@ namespace WebApi
             app.ConfigureSwagger(provider);
 
             app.ConfigureExceptionHandler(logger);
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
