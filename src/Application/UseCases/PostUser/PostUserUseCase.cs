@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.PostUser
 {
-    public class PostUseCase : IPostUseCase
+    public class PostUserUseCase : IPostUserUseCase
     {
         public async Task Execute(PostUserRequest requestModel)
         {

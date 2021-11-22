@@ -24,7 +24,7 @@ namespace WebApi.Controllers.v1.UseCases.PostUser
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(
-            [FromServices] IPostUseCase useCase,
+            [FromServices] IPostUserUseCase useCase,
             [FromBody] PostUserRequest request)
         {
             await useCase.Execute(request)

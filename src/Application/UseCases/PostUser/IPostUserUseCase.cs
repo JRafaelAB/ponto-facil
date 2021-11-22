@@ -3,7 +3,7 @@
     using Domain.Models.Requests;
     using System.Threading.Tasks;
 
-    public interface IPostUseCase
+    public interface IPostUserUseCase
     {
         Task Execute(PostUserRequest requestModel);
     }

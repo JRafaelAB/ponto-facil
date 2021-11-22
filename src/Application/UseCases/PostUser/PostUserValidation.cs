@@ -1,14 +1,17 @@
-﻿using Domain.Models.Requests;
+﻿using Domain.Exceptions;
+using Domain.Models.Requests;
+using Domain.Resources;
 using System;
 using System.Threading.Tasks;
 
 namespace Application.UseCases.PostUser
 {
-    public class PostUserValidation : IPostUseCase
+    public class PostUserValidation : IPostUserUseCase
     {
-        private IPostUseCase _useCase;
+        private IPostUserUseCase _useCase;
+        private NotificationError _notificationError = new NotificationError();
 
-        public PostUserValidation(IPostUseCase useCase)
+        public PostUserValidation(IPostUserUseCase useCase)
         {
             this._useCase = useCase;
         }
@@ -17,7 +20,25 @@ namespace Application.UseCases.PostUser
         {
             if (string.IsNullOrEmpty(requestModel.Name))
             {
-                Console.WriteLine("Required name");
+                _notificationError.Add(Messages.RequiredName);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(requestModel.Login))
+            {
+                _notificationError.Add(Messages.RequiredLogin);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(requestModel.Password))
+            {
+                _notificationError.Add(Messages.RequiredPassword);
+                return;
+            }
+
+            if (_notificationError.IsInvalid)
+            {
+                throw new InvalidRequestException(_notificationError);
             }
 
             await Task.CompletedTask

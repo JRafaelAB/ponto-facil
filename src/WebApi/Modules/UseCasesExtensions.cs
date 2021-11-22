@@ -7,8 +7,8 @@ namespace WebApi.Modules
     {
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
-            services.AddScoped<IPostUseCase, PostUseCase>();
-            services.Decorate<IPostUseCase, PostUserValidation>();
+            services.AddScoped<IPostUserUseCase, PostUserUseCase>();
+            services.Decorate<IPostUserUseCase, PostUserValidation>();
             return services;
         }
     }
