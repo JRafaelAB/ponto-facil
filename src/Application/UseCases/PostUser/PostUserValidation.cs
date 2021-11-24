@@ -21,19 +21,16 @@ namespace Application.UseCases.PostUser
             if (string.IsNullOrEmpty(requestModel.Name))
             {
                 _notificationError.Add(Messages.RequiredName);
-                return;
             }
 
             if (string.IsNullOrEmpty(requestModel.Login))
             {
                 _notificationError.Add(Messages.RequiredLogin);
-                return;
             }
 
             if (string.IsNullOrEmpty(requestModel.Password))
             {
                 _notificationError.Add(Messages.RequiredPassword);
-                return;
             }
 
             if (_notificationError.IsInvalid)

@@ -6,7 +6,7 @@
         public string? Login { get; }
         public string? Password { get; }
 
-        public PostUserRequest(string name, string login, string password)
+        public PostUserRequest(string? name, string? login, string? password)
         {
             Name = name;
             Login = login;
