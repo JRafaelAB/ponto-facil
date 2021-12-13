@@ -1,7 +1,11 @@
 ﻿using Application.UseCases.PostUser;
 using Domain.Exceptions;
 using Domain.Models.Requests;
+using Domain.Repositories;
 using Domain.Resources;
+using Domain.UnitOfWork;
+using Microsoft.Extensions.Configuration;
+using Moq;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,22 +15,33 @@ namespace UnitTests.UseCases.PostUser
 {
     public class PostUserValidationTest
     {
-        public PostUserUseCase useCase;
+        public Mock<PostUserUseCase> useCase;
         public PostUserValidation validation;
         public NotificationError notificationError;
+        private Mock<IConfiguration> _configuration;
+        private Mock<IUserRepository> _repository;
+        private Mock<IUnitOfWork> _unitOfWork;
+        private Mock<IConfigurationSection> _mockSection;
+
+        private string _userSaltSize = "UserSaltSize";
 
         public PostUserValidationTest()
         {
-            this.useCase = new();
-            this.validation = new PostUserValidation(useCase);
+            this._mockSection = new();
+            this._configuration = new();
+            this._repository = new();
+            this._unitOfWork = new();
+            this.useCase = new(_configuration.Object, _repository.Object, _unitOfWork.Object);
+            this.validation = new PostUserValidation(useCase.Object);
             this.notificationError = new();
         }
 
         [Fact]
         public async Task TestarSucesso()
         {
+            _mockSection.Setup(section => section.Value).Returns("100");
+            _configuration.Setup(x => x.GetSection(_userSaltSize)).Returns(_mockSection.Object);
             await validation.Execute(PostUserDataSetup.usuarioValido);
-            Assert.False(notificationError.IsInvalid);
         }
 
         [Theory]

@@ -1,7 +1,6 @@
 ﻿using Domain.Exceptions;
 using Domain.Models.Requests;
 using Domain.Resources;
-using System;
 using System.Threading.Tasks;
 
 namespace Application.UseCases.PostUser
@@ -18,17 +17,17 @@ namespace Application.UseCases.PostUser
 
         public async Task Execute(PostUserRequest requestModel)
         {
-            if (string.IsNullOrEmpty(requestModel.Name))
+            if (string.IsNullOrEmpty(requestModel.Name) || string.IsNullOrWhiteSpace(requestModel.Name))
             {
                 _notificationError.Add(Messages.RequiredName);
             }
 
-            if (string.IsNullOrEmpty(requestModel.Login))
+            if (string.IsNullOrEmpty(requestModel.Login) || string.IsNullOrWhiteSpace(requestModel.Login))
             {
                 _notificationError.Add(Messages.RequiredLogin);
             }
 
-            if (string.IsNullOrEmpty(requestModel.Password))
+            if (string.IsNullOrEmpty(requestModel.Password) || string.IsNullOrWhiteSpace(requestModel.Password))
             {
                 _notificationError.Add(Messages.RequiredPassword);
             }
@@ -38,7 +37,8 @@ namespace Application.UseCases.PostUser
                 throw new InvalidRequestException(_notificationError);
             }
 
-            await Task.CompletedTask
+            await this._useCase
+                .Execute(requestModel)
                 .ConfigureAwait(false);
         }
     }

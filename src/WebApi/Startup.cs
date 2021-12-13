@@ -24,8 +24,8 @@ namespace WebApi
             services
                 .AddSwagger()
                 .AddVersioning()
-                .AddLogger(Configuration)
-                .AddSQLServer(Configuration)
+                .AddLogger(this.Configuration)
+                .AddSQLServer(this.Configuration)
                 .AddUseCases()
                 .AddControllers();
         }
