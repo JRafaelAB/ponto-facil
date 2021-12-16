@@ -37,7 +37,7 @@ namespace UnitTests.UseCases.PostUser
         }
 
         [Fact]
-        public async Task TestarSucesso()
+        public async Task TestingSuccess()
         {
             _mockSection.Setup(section => section.Value).Returns("100");
             _configuration.Setup(x => x.GetSection(_userSaltSize)).Returns(_mockSection.Object);
