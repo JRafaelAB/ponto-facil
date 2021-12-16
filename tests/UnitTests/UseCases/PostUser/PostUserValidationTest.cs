@@ -32,7 +32,7 @@ namespace UnitTests.UseCases.PostUser
             this._repository = new();
             this._unitOfWork = new();
             this.useCase = new(_configuration.Object, _repository.Object, _unitOfWork.Object);
-            this.validation = new PostUserValidation(useCase.Object);
+            this.validation = new PostUserValidation(useCase.Object, _repository.Object);
             this.notificationError = new();
         }
 
