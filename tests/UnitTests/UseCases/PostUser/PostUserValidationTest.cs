@@ -41,7 +41,7 @@ namespace UnitTests.UseCases.PostUser
         {
             _mockSection.Setup(section => section.Value).Returns("100");
             _configuration.Setup(x => x.GetSection(_userSaltSize)).Returns(_mockSection.Object);
-            await validation.Execute(PostUserDataSetup.usuarioValido);
+            await validation.Execute(PostUserDataSetup.validUser);
         }
 
         [Theory]

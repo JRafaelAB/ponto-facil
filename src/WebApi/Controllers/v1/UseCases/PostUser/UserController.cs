@@ -27,8 +27,7 @@ namespace WebApi.Controllers.v1.UseCases.PostUser
             [FromServices] IPostUserUseCase useCase,
             [FromBody] PostUserRequest request)
         {
-            await useCase.Execute(request)
-                .ConfigureAwait(false);
+            await useCase.Execute(request);
 
             return NoContent();
         }

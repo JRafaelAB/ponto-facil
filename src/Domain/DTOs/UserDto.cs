@@ -41,7 +41,7 @@ namespace Domain.DTOs
 
         protected bool Equals(UserDto other)
         {
-            return this.Name == other.Name && this.Login == other.Login && this.Password == other.Password && this.Salt == other.Salt;
+            return this.Name == other.Name && this.Login == other.Login;
         }
 
         public override bool Equals(object? obj)
