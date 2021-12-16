@@ -30,8 +30,8 @@ namespace Application.UseCases.PostUser
 
             UserDto user = new(request, salt, password);
 
-            await _repository.AddUser(user).ConfigureAwait(false);
-            await _unitOfWork.Save().ConfigureAwait(false);
+            await _repository.AddUser(user);
+            await _unitOfWork.Save();
         }
     }
 }
