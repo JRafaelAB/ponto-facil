@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess.Contexts
 {
-    public sealed class ClockContext : DbContext
+    public class ClockContext : DbContext
     {
         
         private IDbConnection _connection;
@@ -23,9 +23,9 @@ namespace Infrastructure.DataAccess.Contexts
             private set => _connection = value;
         }
         
-        public DbSet<User> Users { get; init; }
+        public virtual  DbSet<User> Users { get; set; }
         
-        public DbSet<Clock> Clocks { get; init; }
+        public virtual  DbSet<Clock> Clocks { get; set; }
         
         public ClockContext()
         {
@@ -39,7 +39,7 @@ namespace Infrastructure.DataAccess.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ValidateNullArgument();
+            modelBuilder.ValidateNullArgument(nameof(modelBuilder));
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClockContext).Assembly);
         }

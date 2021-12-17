@@ -24,11 +24,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="Resources\Messages.resx" />
-      <Resource Include="Resources\Messages.resx">
+      <EmbeddedResource Update="Resources\Messages.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-      </Resource>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>
