@@ -13,11 +13,11 @@ namespace Domain.Utils
             }
         }
 
-        public static void ValidateStringArgumentNotNullOrEmpty(this string argument, string paramName)
+        public static void ValidateStringArgumentNotNullOrEmpty(this string? argument, string? paramName = null)
         {
             if (string.IsNullOrWhiteSpace(argument))
             {
-                throw new ArgumentException(Messages.ArgumentStringNullOrEmpty,paramName);
+                throw new ArgumentException(Messages.ArgumentStringNullOrEmpty, paramName);
             }
         }
     }

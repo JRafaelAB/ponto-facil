@@ -1,6 +1,8 @@
-﻿using Domain.Utils;
+﻿using Application.UseCases.PostUser;
+using Domain.Models.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace WebApi.Controllers.v1.UseCases.PostUser
 {
@@ -13,17 +15,21 @@ namespace WebApi.Controllers.v1.UseCases.PostUser
     public class UserController : ControllerBase
     {
         /// <summary>
-        /// Hello World
+        /// Cria usuários.
         /// </summary>
-        /// <returns>A greeting message</returns>
         /// <response code="200">Returns the greeting message</response>
+        /// <param name="useCase"></param>
+        /// <param name="request"></param>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        public IActionResult GetHelloWorld()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Post(
+            [FromServices] IPostUserUseCase useCase,
+            [FromBody] PostUserRequest request)
         {
-            string teste = null;
-            teste.ValidateStringArgumentNotNullOrEmpty(string.Empty);
-            return Ok("Hello World, I'm Alive!");
+            await useCase.Execute(request);
+
+            return NoContent();
         }
     }
 }

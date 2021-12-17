@@ -20,6 +20,7 @@ namespace WebApi.Modules.Swagger
                 options.IncludeXmlComments(xmlPath);
             });
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGenNewtonsoftSupport();
             return services;
         }
 
@@ -30,7 +31,7 @@ namespace WebApi.Modules.Swagger
             {
                 foreach (ApiVersionDescription description in provider.ApiVersionDescriptions)
                 {
-                    option.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", 
+                    option.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
                         description.GroupName.ToUpperInvariant());
                 }
             });

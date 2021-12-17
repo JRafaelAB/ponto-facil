@@ -1,5 +1,7 @@
 ﻿using System;
 using Domain.Entities;
+using Domain.Models.Requests;
+using Domain.Utils;
 
 namespace Domain.DTOs
 {
@@ -12,23 +14,34 @@ namespace Domain.DTOs
 
         public UserDto(User user)
         {
-            Name = user.Name;
-            Login = user.Login;
-            Password = user.Password;
-            Salt = user.Salt;
+            this.Name = user.Name;
+            this.Login = user.Login;
+            this.Password = user.Password;
+            this.Salt = user.Salt;
         }
-        
+
         public UserDto(string name, string login, string password, string salt)
         {
-            Name = name;
-            Login = login;
-            Password = password;
-            Salt = salt;
+            this.Name = name;
+            this.Login = login;
+            this.Password = password;
+            this.Salt = salt;
         }
-        
+
+        public UserDto(PostUserRequest request, string salt, string password)
+        {
+            request.Name.ValidateStringArgumentNotNullOrEmpty(nameof(request.Name));
+            request.Login.ValidateStringArgumentNotNullOrEmpty(nameof(request.Login));
+            request.Password.ValidateStringArgumentNotNullOrEmpty(nameof(request.Password));
+            this.Name = request.Name!;
+            this.Login = request.Login!;
+            this.Password = password;
+            this.Salt = salt;
+        }
+
         protected bool Equals(UserDto other)
         {
-            return Name == other.Name && Login == other.Login && Password == other.Password && Salt == other.Salt;
+            return this.Name == other.Name && this.Login == other.Login;
         }
 
         public override bool Equals(object? obj)
@@ -40,7 +53,7 @@ namespace Domain.DTOs
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Name, Login, Password, Salt);
+            return HashCode.Combine(this.Name, this.Login, this.Password, this.Salt);
         }
 
         public static bool operator ==(UserDto? left, UserDto? right)
