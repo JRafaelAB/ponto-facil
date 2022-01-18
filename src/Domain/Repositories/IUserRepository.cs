@@ -9,5 +9,7 @@ namespace Domain.Repositories
         Task AddUser(UserDto userDto);
 
         Task<User?> GetLogin(string login);
+
+        Task<User?> GetUser(string login, string password);
     }
 }

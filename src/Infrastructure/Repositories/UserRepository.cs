@@ -27,5 +27,16 @@ namespace Infrastructure.Repositories
         {
             return await this._context.Users.Where(user => user.Login == login).SingleOrDefaultAsync();
         }
+
+        public async Task<User?> GetUser(string login, string password)
+        {
+            User? user = await this._context
+                .Users
+                .Where(request => request.Login == login && request.Password == password)
+                .Select(request => request)
+                .SingleOrDefaultAsync();
+
+            return user;
+        }
     }
 }
