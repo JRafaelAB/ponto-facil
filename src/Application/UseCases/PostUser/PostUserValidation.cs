@@ -51,8 +51,7 @@ namespace Application.UseCases.PostUser
             }
 
             await this._useCase
-                .Execute(requestModel)
-                .ConfigureAwait(false);
+                .Execute(requestModel);
         }
     }
 }
