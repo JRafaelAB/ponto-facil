@@ -27,9 +27,11 @@ namespace WebApi.Controllers.v1.UseCases.LoginUser
             [FromServices] ILoginUserUseCase useCase,
             [FromBody] LoginUserRequest request)
         {
-            await useCase.Execute(request);
+            string token = await useCase.Execute(request);
 
-            return NoContent();
+            this.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Secure = true });
+
+            return Ok(request);
         }
     }
 }

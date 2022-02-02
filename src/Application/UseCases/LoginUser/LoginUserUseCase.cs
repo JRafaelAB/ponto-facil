@@ -17,13 +17,13 @@ namespace Application.UseCases.LoginUser
             this._service = service;
         }
 
-        public async Task Execute(LoginUserRequest request)
+        public async Task<string> Execute(LoginUserRequest request)
         {
             User? user = await this._repository.GetUser(request.Login, request.Password);
 
-            _service.GenerateToken(user!);
+            string token = _service.GenerateToken(user!);
 
-            await Task.CompletedTask;
+            return token;
         }
     }
 }

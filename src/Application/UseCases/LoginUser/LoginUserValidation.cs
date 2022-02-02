@@ -19,7 +19,7 @@ namespace Application.UseCases.LoginUser
             this._repository = repository;
         }
 
-        public async Task Execute(LoginUserRequest request)
+        public async Task<string> Execute(LoginUserRequest request)
         {
             if (!string.IsNullOrEmpty(request.Login))
             {
@@ -35,7 +35,7 @@ namespace Application.UseCases.LoginUser
                 throw new InvalidRequestException(_notificationError);
             }
 
-            await this._useCase
+            return await this._useCase
                 .Execute(request);
         }
     }

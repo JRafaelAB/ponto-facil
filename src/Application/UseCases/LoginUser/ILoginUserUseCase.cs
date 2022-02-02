@@ -5,6 +5,6 @@ namespace Application.UseCases.LoginUser
 {
     public interface ILoginUserUseCase
     {
-        Task Execute(LoginUserRequest request);
+        Task<string> Execute(LoginUserRequest request);
     }
 }
