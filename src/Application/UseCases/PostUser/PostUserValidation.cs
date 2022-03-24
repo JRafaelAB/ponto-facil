@@ -19,26 +19,26 @@ namespace Application.UseCases.PostUser
             this._repository = repository;
         }
 
-        public async Task Execute(PostUserRequest requestModel)
+        public async Task Execute(PostUserRequest request)
         {
-            if (string.IsNullOrEmpty(requestModel.Name) || string.IsNullOrWhiteSpace(requestModel.Name))
+            if (string.IsNullOrEmpty(request.Name) || string.IsNullOrWhiteSpace(request.Name))
             {
                 _notificationError.Add(Messages.RequiredName);
             }
 
-            if (string.IsNullOrEmpty(requestModel.Login) || string.IsNullOrWhiteSpace(requestModel.Login))
+            if (string.IsNullOrEmpty(request.Login) || string.IsNullOrWhiteSpace(request.Login))
             {
                 _notificationError.Add(Messages.RequiredLogin);
             }
 
-            if (string.IsNullOrEmpty(requestModel.Password) || string.IsNullOrWhiteSpace(requestModel.Password))
+            if (string.IsNullOrEmpty(request.Password) || string.IsNullOrWhiteSpace(request.Password))
             {
                 _notificationError.Add(Messages.RequiredPassword);
             }
 
-            if (!string.IsNullOrEmpty(requestModel.Login))
+            if (!string.IsNullOrEmpty(request.Login))
             {
-                User? user = await _repository.GetLogin(requestModel.Login);
+                User? user = await _repository.GetLogin(request.Login);
                 if (user != null)
                 {
                     _notificationError.Add(Messages.InvalidLogin);
@@ -51,7 +51,7 @@ namespace Application.UseCases.PostUser
             }
 
             await this._useCase
-                .Execute(requestModel);
+                .Execute(request);
         }
     }
 }
