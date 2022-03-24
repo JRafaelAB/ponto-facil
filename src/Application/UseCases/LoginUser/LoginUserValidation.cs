@@ -21,7 +21,7 @@ namespace Application.UseCases.LoginUser
 
         public async Task<string> Execute(LoginUserRequest request)
         {
-            if (!string.IsNullOrEmpty(request.Login))
+            if (!string.IsNullOrEmpty(request.Login) && !string.IsNullOrEmpty(request.Password))
             {
                 User? user = await this._repository.GetUser(request.Login, request.Password);
                 if (user == null)
@@ -30,9 +30,19 @@ namespace Application.UseCases.LoginUser
                 }
             }
 
+            if (string.IsNullOrEmpty(request.Login) || string.IsNullOrWhiteSpace(request.Login))
+            {
+                _notificationError.Add(Messages.RequiredLogin);
+            }
+
+            if (string.IsNullOrEmpty(request.Password) || string.IsNullOrWhiteSpace(request.Password))
+            {
+                _notificationError.Add(Messages.RequiredPassword);
+            }
+
             if (_notificationError.IsInvalid)
             {
-                throw new InvalidRequestException(_notificationError);
+                throw new InvalidLoginException(_notificationError);
             }
 
             return await this._useCase
