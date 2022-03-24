@@ -4,6 +4,6 @@ namespace Infrastructure.Services
 {
     public interface ITokenService
     {
-        public string GenerateToken(User userDto);
+        public string GenerateToken(User user);
     }
 }

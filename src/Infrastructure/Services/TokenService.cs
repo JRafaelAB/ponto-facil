@@ -18,13 +18,13 @@
             this.configuration = configuration;
         }
 
-        public string GenerateToken(User userDto)
+        public string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(configuration.GetSection("JWT:Secret").Value);
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, userDto.Login)
+                new Claim(ClaimTypes.Name, user.Login)
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
