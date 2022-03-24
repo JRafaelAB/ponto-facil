@@ -23,6 +23,14 @@ namespace WebApi.Modules.Middlewares
                     logger.Error($"Invalid Request: {JsonConvert.SerializeObject(invalidRequest.notificationError)}");
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(invalidRequest.notificationError));
                     break;
+
+                case InvalidLoginException invalidLogin:
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    context.Response.ContentType = MediaTypeNames.Application.Json;
+                    logger.Error($"Invalid Login: {JsonConvert.SerializeObject(invalidLogin.notificationError)}");
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(invalidLogin.notificationError));
+                    break;
+
                 default:
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     context.Response.ContentType = MediaTypeNames.Application.Json;
