@@ -14,19 +14,20 @@ namespace WebApi.Controllers.v1.UseCases.LoginUser
     [ApiVersion("1.0")]
     [ApiController]
     [Route("v{version:apiVersion}/[controller]")]
-    public class LoginController : BaseController
+    public class UsersController : BaseController
     {
         private readonly ILoginUserUseCase _useCase;
 
-        public LoginController(ILoginUserUseCase useCase)
+        public UsersController(ILoginUserUseCase useCase)
         {
             _useCase = useCase;
         }
         
         /// <summary>
-        /// Fazer login.
+        /// Faz login.
         /// </summary>
         /// <response code="204">Successfull Request.</response>
+        /// <response code="400">Invalid Request or Login/Password are Invalid.</response>
         /// <param name="request"></param>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

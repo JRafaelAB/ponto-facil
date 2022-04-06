@@ -10,7 +10,7 @@ namespace WebApi.Modules
         {
             services.AddScoped<IPostUserUseCase, PostUserUseCase>();
 
-            services.AddScoped<ILoginUserUseCase, LoginUserUseCase>();
+            services.AddScoped<ILoginUserUseCase, LoginUseCase>();
 
             return services;
         }

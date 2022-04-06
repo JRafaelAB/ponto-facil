@@ -7,12 +7,12 @@ using Domain.Resources;
 
 namespace Application.UseCases.LoginUser
 {
-    public class LoginUserUseCase : ILoginUserUseCase
+    public class LoginUseCase : ILoginUserUseCase
     {
         private readonly IUserRepository _repository;
         private readonly ITokenService _service;
 
-        public LoginUserUseCase(IUserRepository repository, ITokenService service)
+        public LoginUseCase(IUserRepository repository, ITokenService service)
         {
             this._repository = repository;
             this._service = service;

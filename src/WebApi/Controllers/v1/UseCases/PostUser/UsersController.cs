@@ -23,7 +23,7 @@ namespace WebApi.Controllers.v1.UseCases.PostUser
         }
         
         /// <summary>
-        /// Cria usuários.
+        /// Cria um usuário.
         /// </summary>
         /// <response code="204">Successfull Request.</response>
         /// <response code="400">Invalid Request.</response>
