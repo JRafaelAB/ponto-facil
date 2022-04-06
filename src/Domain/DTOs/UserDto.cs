@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Constants;
 using Domain.Entities;
 using Domain.Models.Requests;
 using Domain.Utils;
@@ -28,15 +29,22 @@ namespace Domain.DTOs
             this.Salt = salt;
         }
 
-        public UserDto(PostUserRequest request, string salt, string password)
+        public UserDto(PostUserRequest request)
         {
-            request.Name.ValidateStringArgumentNotNullOrEmpty(nameof(request.Name));
-            request.Login.ValidateStringArgumentNotNullOrEmpty(nameof(request.Login));
-            request.Password.ValidateStringArgumentNotNullOrEmpty(nameof(request.Password));
-            this.Name = request.Name!;
-            this.Login = request.Login!;
+            var size = Configuration.GetConfigurationValue<uint>(ConfigurationConstants.USER_SALT_SIZE);
+            var salt = Cryptography.GenerateSalt(size);
+            var password = Cryptography.EncryptPassword(request.Password, salt);
+            
+            this.Name = request.Name;
+            this.Login = request.Login;
             this.Password = password;
             this.Salt = salt;
+        }
+
+        public bool ValidatePassword(string password)
+        {
+            var encryptedPassword = Cryptography.EncryptPassword(password, this.Salt);
+            return encryptedPassword.Equals(this.Password);
         }
 
         protected bool Equals(UserDto other)

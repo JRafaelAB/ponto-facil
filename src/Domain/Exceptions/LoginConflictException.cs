@@ -2,18 +2,19 @@
 
 namespace Domain.Exceptions
 {
-    public class InvalidLoginException : Exception
+    public class LoginConflictException : Exception
     {
         public readonly NotificationError notificationError;
 
-        public InvalidLoginException(NotificationError notificationError)
+        public LoginConflictException(NotificationError notificationError)
         {
             this.notificationError = notificationError;
         }  
         
-        public InvalidLoginException(string errorMessage)
+        public LoginConflictException(string errorMessage)
         {
             this.notificationError = new NotificationError(errorMessage);
         }
+        
     }
 }

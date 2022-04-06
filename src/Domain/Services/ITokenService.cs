@@ -1,9 +1,9 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs;
 
 namespace Infrastructure.Services
 {
     public interface ITokenService
     {
-        public string GenerateToken(User user);
+        public string GenerateToken(UserDto user);
     }
 }

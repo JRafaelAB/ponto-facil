@@ -1,40 +1,43 @@
-﻿using Application.UseCases.LoginUser;
+﻿using Application.UseCases.PostUser;
 using Domain.Models.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Domain.Extensions;
 using WebApi.Controllers.Base;
 
-namespace WebApi.Controllers.v1.UseCases.LoginUser
+namespace WebApi.Controllers.v1.UseCases.PostUser
 {
     /// <summary>
-    /// UserController
+    /// UsersController
     /// </summary>
     [ApiVersion("1.0")]
     [ApiController]
     [Route("v{version:apiVersion}/[controller]")]
-    public class LoginController : BaseController
+    public class UsersController : BaseController
     {
-        private readonly ILoginUserUseCase _useCase;
+        private readonly IPostUserUseCase _useCase;
 
-        public LoginController(ILoginUserUseCase useCase)
+        public UsersController(IPostUserUseCase useCase)
         {
             _useCase = useCase;
         }
         
         /// <summary>
-        /// Fazer login.
+        /// Cria usuários.
         /// </summary>
         /// <response code="204">Successfull Request.</response>
+        /// <response code="400">Invalid Request.</response>
+        /// <response code="409">Already Existing Login.</response>
         /// <param name="request"></param>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Login([FromBody] LoginUserRequest request)
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<IActionResult> PostUser([FromBody] PostUserRequest request)
         {
             ValidateRequest(request);
-            this.Response.Cookies.AppendAccessToken(await _useCase.Execute(request));
+            await _useCase.Execute(request);
+
             return NoContent();
         }
     }

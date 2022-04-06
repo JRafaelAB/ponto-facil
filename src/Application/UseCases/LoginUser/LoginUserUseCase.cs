@@ -1,15 +1,16 @@
-﻿using Domain.Entities;
-using Domain.Models.Requests;
+﻿using Domain.Models.Requests;
 using Domain.Repositories;
 using Infrastructure.Services;
 using System.Threading.Tasks;
+using Domain.Exceptions;
+using Domain.Resources;
 
 namespace Application.UseCases.LoginUser
 {
     public class LoginUserUseCase : ILoginUserUseCase
     {
-        private IUserRepository _repository;
-        private ITokenService _service;
+        private readonly IUserRepository _repository;
+        private readonly ITokenService _service;
 
         public LoginUserUseCase(IUserRepository repository, ITokenService service)
         {
@@ -19,11 +20,14 @@ namespace Application.UseCases.LoginUser
 
         public async Task<string> Execute(LoginUserRequest request)
         {
-            User? user = await this._repository.GetUser(request.Login, request.Password);
+            var user = await this._repository.GetUser(request.Login);
+            
+            if (user == null || !user.ValidatePassword(request.Password))
+            {
+                throw new InvalidLoginException(Messages.InvalidLoginPassword);
+            }
 
-            string token = _service.GenerateToken(user!);
-
-            return token;
+            return _service.GenerateToken(user);
         }
     }
 }

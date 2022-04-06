@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Domain.Utils.Configuration.SetConfiguration(Configuration);
         }
 
         public IConfiguration Configuration { get; }
@@ -29,6 +31,11 @@ namespace WebApi
                 .AddSQLServer(this.Configuration)
                 .AddUseCases()
                 .AddControllers();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider, ILogger logger)

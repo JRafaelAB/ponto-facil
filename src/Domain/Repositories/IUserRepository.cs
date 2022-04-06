@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Domain.DTOs;
-using Domain.Entities;
 
 namespace Domain.Repositories
 {
@@ -8,8 +7,6 @@ namespace Domain.Repositories
     {
         Task AddUser(UserDto userDto);
 
-        Task<User?> GetLogin(string login);
-
-        Task<User?> GetUser(string login, string password);
+        Task<UserDto?> GetUser(string login);
     }
 }

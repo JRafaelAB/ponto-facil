@@ -1,12 +1,17 @@
-﻿namespace Domain.Models.Requests
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Domain.Models.Requests
 {
     public class PostUserRequest
     {
-        public string? Name { get; }
-        public string? Login { get; }
-        public string? Password { get; }
+        [Required(AllowEmptyStrings = false)]
+        public string Name { get; }
+        [Required(AllowEmptyStrings = false)]
+        public string Login { get; }
+        [Required(AllowEmptyStrings = false)]
+        public string Password { get; }
 
-        public PostUserRequest(string? name, string? login, string? password)
+        public PostUserRequest(string name, string login, string password)
         {
             Name = name;
             Login = login;
