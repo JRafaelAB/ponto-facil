@@ -14,6 +14,11 @@ namespace Domain.Exceptions
         public NotificationError()
         {
             ErrorMessages = new List<string>();
+        }   
+        
+        public NotificationError(string message)
+        {
+            ErrorMessages = new List<string>{ message };
         }
 
         public void Add(string message)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Application.UseCases.PostUser;
+using Application.UseCases.LoginUser;
 
 namespace WebApi.Modules
 {
@@ -8,7 +9,9 @@ namespace WebApi.Modules
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
             services.AddScoped<IPostUserUseCase, PostUserUseCase>();
-            services.Decorate<IPostUserUseCase, PostUserValidation>();
+
+            services.AddScoped<ILoginUserUseCase, LoginUseCase>();
+
             return services;
         }
     }

@@ -23,9 +23,11 @@ namespace Infrastructure.Repositories
             await this._context.Users.AddAsync(userEntity);
         }
 
-        public async Task<User?> GetLogin(string login)
+        public async Task<UserDto?> GetUser(string login)
         {
-            return await this._context.Users.Where(user => user.Login == login).SingleOrDefaultAsync();
+            var user = await this._context.Users.Where(user => user.Login == login).SingleOrDefaultAsync();
+            
+            return user == null ? null : new UserDto(user);
         }
     }
 }

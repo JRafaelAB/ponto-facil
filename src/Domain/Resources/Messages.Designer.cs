@@ -88,6 +88,15 @@ namespace Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The login or password is incorrect..
+        /// </summary>
+        public static string InvalidLoginPassword {
+            get {
+                return ResourceManager.GetString("InvalidLoginPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The field login is required..
         /// </summary>
         public static string RequiredLogin {

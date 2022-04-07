@@ -135,4 +135,7 @@
   <data name="InvalidLogin" xml:space="preserve">
     <value>Login already exists.</value>
   </data>
+  <data name="InvalidLoginPassword" xml:space="preserve">
+    <value>The login or password is incorrect.</value>
+  </data>
 </root>

@@ -2,18 +2,15 @@
 
 namespace Domain.Models.Requests
 {
-    public class PostUserRequest
+    public class LoginUserRequest
     {
-        [Required(AllowEmptyStrings = false)]
-        public string Name { get; }
         [Required(AllowEmptyStrings = false)]
         public string Login { get; }
         [Required(AllowEmptyStrings = false)]
         public string Password { get; }
 
-        public PostUserRequest(string name, string login, string password)
+        public LoginUserRequest(string login, string password)
         {
-            Name = name;
             Login = login;
             Password = password;
         }

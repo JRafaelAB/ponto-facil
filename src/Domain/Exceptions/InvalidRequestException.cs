@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace Domain.Exceptions
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class InvalidRequestException : Exception
     {
-        public NotificationError notificationError;
-
-        public InvalidRequestException(NotificationError notificationError)
+        [JsonProperty]
+        public IList<string> ErrorMessages { get; }
+        public InvalidRequestException(IEnumerable<string> errors)
         {
-            this.notificationError = notificationError;
+            this.ErrorMessages = errors.ToList();
         }
     }
 }

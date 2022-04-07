@@ -2,45 +2,63 @@
 using Domain.DTOs;
 using Domain.Repositories;
 using Domain.UnitOfWork;
-using Domain.Utils;
-using Microsoft.Extensions.Configuration;
 using Moq;
 using System.Threading.Tasks;
+using Domain.Exceptions;
+using Domain.Utils;
 using Xunit;
 
 namespace UnitTests.UseCases.PostUser
 {
     public class PostUserUseCaseTest
     {
-        private Mock<IConfiguration> _configuration;
-        private Mock<IConfigurationSection> _mockSection;
-        private Mock<IUserRepository> _repository;
-        private Mock<IUnitOfWork> _unitOfWork;
-        public PostUserUseCase useCase;
+        private readonly Mock<IUserRepository> _userRepository;
+        private readonly Mock<IUnitOfWork> _unitOfWork;
+        private readonly PostUserUseCase _useCase;
 
         public PostUserUseCaseTest()
         {
-            this._mockSection = new();
-            this._configuration = new();
-            this._repository = new();
-            this._unitOfWork = new();
-            this.useCase = new PostUserUseCase(_configuration.Object, _repository.Object, _unitOfWork.Object);
+            Configuration.SetConfiguration(TestConfigurationBuilder.BuildTestConfiguration());
+            this._userRepository = new Mock<IUserRepository>();
+            this._unitOfWork = new Mock<IUnitOfWork>();
+            this._useCase = new PostUserUseCase(_userRepository.Object, _unitOfWork.Object);
         }
 
         [Fact]
         public async Task TestingSucess()
         {
-            _mockSection.Setup(section => section.Value).Returns("100");
-            _configuration.Setup(x => x.GetSection("UserSaltSize")).Returns(_mockSection.Object);
-            var salt = Cryptography.GenerateSalt(100);
-            var password = Cryptography.EncryptPassword(PostUserDataSetup.validUser.Password!, salt);
+            UserDto user = new("usuario", "email", "10", "10");
 
-            UserDto user = new(PostUserDataSetup.validUser, salt, password);
-
-            await useCase.Execute(PostUserDataSetup.validUser);
-
-            this._unitOfWork.Verify(x => x.Save(), Times.Exactly(1));
+            await _useCase.Execute(PostUserDataSetup.validUser);
+            
+            this._userRepository.Verify(repo => repo.AddUser(user), Times.Once);
+            this._userRepository.Verify(repo => repo.GetUser("email"), Times.Once);
+            this._unitOfWork.Verify(x => x.Save(), Times.Once);
             Assert.Equal(PostUserDataSetup.validUser.Login, user.Login);
         }
+
+        [Fact]
+        public async Task TestingExistingLogin()
+        {
+            ConfigureUserRepositoryForExistingLogin();
+            
+            UserDto user = new("usuario", "email", "10", "10");
+            
+            await Assert.ThrowsAsync<LoginConflictException>(() => _useCase.Execute(PostUserDataSetup.validUser));
+            
+            this._userRepository.Verify(repo => repo.GetUser("email"), Times.Once);
+            this._userRepository.Verify(repo => repo.AddUser(user), Times.Never);
+            this._unitOfWork.Verify(x => x.Save(), Times.Never);
+            Assert.Equal(PostUserDataSetup.validUser.Login, user.Login);
+        }
+
+        #region Auxiliary
+
+        private void ConfigureUserRepositoryForExistingLogin()
+        {
+            this._userRepository.Setup(repo => repo.GetUser("email")).ReturnsAsync(new UserDto("usuario", "email", "10", "10"));
+        }
+
+        #endregion
     }
 }
