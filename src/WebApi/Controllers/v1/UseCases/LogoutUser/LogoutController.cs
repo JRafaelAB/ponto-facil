@@ -21,7 +21,7 @@ namespace WebApi.Controllers.v1.UseCases.LogoutUser
         /// <response code="204">Successfull Request.</response>
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> LogoutAsync([FromServices] ILogoutUserUseCase useCase)
+        public async Task<IActionResult> Logout([FromServices] ILogoutUserUseCase useCase)
         {
             await useCase.Execute();
 
