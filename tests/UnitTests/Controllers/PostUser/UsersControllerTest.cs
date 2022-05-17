@@ -12,12 +12,12 @@ namespace UnitTests.Controllers.PostUser
 {
     public class UsersControllerTest
     {
-        private readonly UsersController _controller;
+        private readonly PostUserController _controller;
 
         public UsersControllerTest()
         {
             var postUserUseCase = new Mock<IPostUserUseCase>();
-            this._controller = new UsersController(postUserUseCase.Object);
+            this._controller = new PostUserController(postUserUseCase.Object);
         }
 
         [Fact]

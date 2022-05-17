@@ -13,15 +13,15 @@ namespace WebApi.Controllers.v1.UseCases.PostUser
     [ApiVersion("1.0")]
     [ApiController]
     [Route("v{version:apiVersion}/[controller]")]
-    public class UsersController : BaseController
+    public class PostUserController : BaseController
     {
         private readonly IPostUserUseCase _useCase;
 
-        public UsersController(IPostUserUseCase useCase)
+        public PostUserController(IPostUserUseCase useCase)
         {
             _useCase = useCase;
         }
-        
+
         /// <summary>
         /// Cria um usuário.
         /// </summary>
